@@ -8,110 +8,126 @@ nameSpace=['Red:','Blue:','Green:','Yellow:','Purple:']
 
 #unlock to lock
 def lockEye(*arg):
-	#print 'lock'
-	selectobj=maya.ls(sl=True)
-	for obj in selectobj:
-		if obj == 'cc_l_eyeball01' or obj =='cc_r_eyeball01':
-			pos=maya.xform(obj,q=True,t=True,ws=True)
-			rot=maya.xform(obj,q=True,ro=True,ws=True)
-			maya.setAttr(obj+'.EyepositionLock',1)
-			print pos
-			print rot
-			maya.move(pos[0],pos[1],pos[2],obj,a=True,ws=True)
-			maya.rotate(rot[0],rot[1],rot[2],obj,a=True,ws=True)
-		else:
-			maya.warning('please select "cc_r_eyeball01" or "cc_r_eyeball01" to lock the control')
+    #print 'lock'
+    selectobj=maya.ls(sl=True)
+    for obj in selectobj:
+        if obj == 'cc_l_eyeball01' or obj =='cc_r_eyeball01':
+            pos=maya.xform(obj,q=True,t=True,ws=True)
+            rot=maya.xform(obj,q=True,ro=True,ws=True)
+            maya.setAttr(obj+'.EyepositionLock',1)
+            print pos
+            print rot
+            maya.move(pos[0],pos[1],pos[2],obj,a=True,ws=True)
+            maya.rotate(rot[0],rot[1],rot[2],obj,a=True,ws=True)
+        else:
+            maya.warning('please select "cc_r_eyeball01" or "cc_r_eyeball01" to lock the control')
 
-#lock to unlock			
+#lock to unlock         
 def UnlockEye(*arg):
-	#print 'Unlock'
-	selectobj=maya.ls(sl=True)
-	for obj in selectobj:
-		if obj == 'cc_l_eyeball01' or obj =='cc_r_eyeball01':
-			pos=maya.xform(obj,q=True,t=True,ws=True)
-			rot=maya.xform(obj,q=True,ro=True,ws=True)
-			maya.setAttr(obj+'.EyepositionLock',0)
-			print pos
-			print rot
-			maya.move(pos[0],pos[1],pos[2],obj,a=True,ws=True)
-			maya.rotate(rot[0],rot[1],rot[2],obj,a=True,ws=True)
-		else:
-			maya.warning('please select "cc_r_eyeball01" or "cc_r_eyeball01" to lock the control')
+    #print 'Unlock'
+    selectobj=maya.ls(sl=True)
+    for obj in selectobj:
+        if obj == 'cc_l_eyeball01' or obj =='cc_r_eyeball01':
+            pos=maya.xform(obj,q=True,t=True,ws=True)
+            rot=maya.xform(obj,q=True,ro=True,ws=True)
+            maya.setAttr(obj+'.EyepositionLock',0)
+            print pos
+            print rot
+            maya.move(pos[0],pos[1],pos[2],obj,a=True,ws=True)
+            maya.rotate(rot[0],rot[1],rot[2],obj,a=True,ws=True)
+        else:
+            maya.warning('please select "cc_r_eyeball01" or "cc_r_eyeball01" to lock the control')
 
 
 def l_followRoot(*arg):
-	#cc_IK_l_stalk_a01
-	pos_e01=maya.xform('cc_IK_l_stalk_e01',q=True,rp=True,ws=True)
-	rot_e01=maya.xform('cc_IK_l_stalk_e01',q=True,ro=True,ws=True)
-	rot_a01=maya.xform('cc_IK_l_stalk_a01',q=True,ro=True,ws=True)
-	maya.setAttr('cc_body_rotate01.l_stalk_follow',1)
-	maya.rotate(rot_a01[0],rot_a01[1],rot_a01[2],'cc_IK_l_stalk_a01',a=True,ws=True)
-	maya.rotate(rot_e01[0],rot_e01[1],rot_e01[2],'cc_IK_l_stalk_e01',a=True,ws=True)
-	maya.move(pos_e01[0],pos_e01[1],pos_e01[2],'cc_IK_l_stalk_e01',a=True,ws=True,rpr=True)
+    #cc_IK_l_stalk_a01
+    pos_e01=maya.xform('cc_IK_l_stalk_e01',q=True,rp=True,ws=True)
+    rot_e01=maya.xform('cc_IK_l_stalk_e01',q=True,ro=True,ws=True)
+    rot_a01=maya.xform('cc_IK_l_stalk_a01',q=True,ro=True,ws=True)
+    pos_eye01=maya.xform('cc_l_eyeball01',q=True,rp=True,ws=True)
+    rot_eye01=maya.xform('cc_l_eyeball01',q=True,ro=True,ws=True)
+    maya.setAttr('cc_body_rotate01.l_stalk_follow',1)
+    maya.rotate(rot_a01[0],rot_a01[1],rot_a01[2],'cc_IK_l_stalk_a01',a=True,ws=True)
+    maya.rotate(rot_e01[0],rot_e01[1],rot_e01[2],'cc_IK_l_stalk_e01',a=True,ws=True)
+    maya.move(pos_e01[0],pos_e01[1],pos_e01[2],'cc_IK_l_stalk_e01',a=True,ws=True,rpr=True)
+    maya.move(pos_eye01[0],pos_eye01[1],pos_eye01[2],'cc_l_eyeball01',a=True,ws=True,rpr=True)
+    maya.rotate(rot_eye01[0],rot_eye01[1],rot_eye01[2],'cc_l_eyeball01',a=True,ws=True)
 
 
 
 def l_followWorld(*arg):
-	#cc_IK_r_stalk_a01
-	pos_e01=maya.xform('cc_IK_l_stalk_e01',q=True,rp=True,ws=True)
-	rot_e01=maya.xform('cc_IK_l_stalk_e01',q=True,ro=True,ws=True)
-	rot_a01=maya.xform('cc_IK_l_stalk_a01',q=True,ro=True,ws=True)
-	#rot_01=maya.xform('cc_l_eyeball01',q=True,ro=True,ws=True)
-	maya.setAttr('cc_body_rotate01.l_stalk_follow',0)
-	maya.rotate(rot_a01[0],rot_a01[1],rot_a01[2],'cc_IK_l_stalk_a01',a=True,ws=True)
-	maya.rotate(rot_e01[0],rot_e01[1],rot_e01[2],'cc_IK_l_stalk_e01',a=True,ws=True)
-	maya.move(pos_e01[0],pos_e01[1],pos_e01[2],'cc_IK_l_stalk_e01',a=True,ws=True,rpr=True)
+    #cc_IK_r_stalk_a01
+    pos_e01=maya.xform('cc_IK_l_stalk_e01',q=True,rp=True,ws=True)
+    rot_e01=maya.xform('cc_IK_l_stalk_e01',q=True,ro=True,ws=True)
+    rot_a01=maya.xform('cc_IK_l_stalk_a01',q=True,ro=True,ws=True)
+    pos_eye01=maya.xform('cc_l_eyeball01',q=True,rp=True,ws=True)
+    rot_eye01=maya.xform('cc_l_eyeball01',q=True,ro=True,ws=True)
+    maya.setAttr('cc_body_rotate01.l_stalk_follow',0)
+    maya.rotate(rot_a01[0],rot_a01[1],rot_a01[2],'cc_IK_l_stalk_a01',a=True,ws=True)
+    maya.rotate(rot_e01[0],rot_e01[1],rot_e01[2],'cc_IK_l_stalk_e01',a=True,ws=True)
+    maya.move(pos_e01[0],pos_e01[1],pos_e01[2],'cc_IK_l_stalk_e01',a=True,ws=True,rpr=True)
+    maya.move(pos_eye01[0],pos_eye01[1],pos_eye01[2],'cc_l_eyeball01',a=True,ws=True,rpr=True)
+    maya.rotate(rot_eye01[0],rot_eye01[1],rot_eye01[2],'cc_l_eyeball01',a=True,ws=True)
+
 
 
 def r_followRoot(*arg):
-	#cc_IK_r_stalk_a01
-	pos_e01=maya.xform('cc_IK_r_stalk_e01',q=True,rp=True,ws=True)
-	rot_e01=maya.xform('cc_IK_r_stalk_e01',q=True,ro=True,ws=True)
-	rot_a01=maya.xform('cc_IK_r_stalk_a01',q=True,ro=True,ws=True)
-	maya.setAttr('cc_body_rotate01.r_stalk_follow',1)
-	maya.rotate(rot_e01[0],rot_e01[1],rot_e01[2],'cc_IK_r_stalk_e01',a=True,ws=True)
-	maya.rotate(rot_a01[0],rot_a01[1],rot_a01[2],'cc_IK_r_stalk_a01',a=True,ws=True)
-	maya.move(pos_e01[0],pos_e01[1],pos_e01[2],'cc_IK_r_stalk_e01',a=True,ws=True,rpr=True)
+    #cc_IK_r_stalk_a01
+    pos_e01=maya.xform('cc_IK_r_stalk_e01',q=True,rp=True,ws=True)
+    rot_e01=maya.xform('cc_IK_r_stalk_e01',q=True,ro=True,ws=True)
+    rot_a01=maya.xform('cc_IK_r_stalk_a01',q=True,ro=True,ws=True)
+    pos_eye01=maya.xform('cc_r_eyeball01',q=True,rp=True,ws=True)
+    rot_eye01=maya.xform('cc_r_eyeball01',q=True,ro=True,ws=True)
+    maya.setAttr('cc_body_rotate01.r_stalk_follow',1)
+    maya.rotate(rot_e01[0],rot_e01[1],rot_e01[2],'cc_IK_r_stalk_e01',a=True,ws=True)
+    maya.rotate(rot_a01[0],rot_a01[1],rot_a01[2],'cc_IK_r_stalk_a01',a=True,ws=True)
+    maya.move(pos_e01[0],pos_e01[1],pos_e01[2],'cc_IK_r_stalk_e01',a=True,ws=True,rpr=True)
+    maya.move(pos_eye01[0],pos_eye01[1],pos_eye01[2],'cc_r_eyeball01',a=True,ws=True,rpr=True)
+    maya.rotate(rot_eye01[0],rot_eye01[1],rot_eye01[2],'cc_r_eyeball01',a=True,ws=True)
 
 
 def r_followWorld(*arg):
-	#cc_IK_r_stalk_a01
-	pos_e01=maya.xform('cc_IK_r_stalk_e01',q=True,rp=True,ws=True)
-	rot_e01=maya.xform('cc_IK_r_stalk_e01',q=True,ro=True,ws=True)
-	rot_a01=maya.xform('cc_IK_r_stalk_a01',q=True,ro=True,ws=True)
-	maya.setAttr('cc_body_rotate01.r_stalk_follow',0)
-	maya.rotate(rot_e01[0],rot_e01[1],rot_e01[2],'cc_IK_r_stalk_e01',a=True,ws=True)
-	maya.rotate(rot_a01[0],rot_a01[1],rot_a01[2],'cc_IK_r_stalk_a01',a=True,ws=True)
-	maya.move(pos_e01[0],pos_e01[1],pos_e01[2],'cc_IK_r_stalk_e01',a=True,ws=True,rpr=True)
+    #cc_IK_r_stalk_a01
+    pos_e01=maya.xform('cc_IK_r_stalk_e01',q=True,rp=True,ws=True)
+    rot_e01=maya.xform('cc_IK_r_stalk_e01',q=True,ro=True,ws=True)
+    rot_a01=maya.xform('cc_IK_r_stalk_a01',q=True,ro=True,ws=True)
+    pos_eye01=maya.xform('cc_r_eyeball01',q=True,rp=True,ws=True)
+    rot_eye01=maya.xform('cc_r_eyeball01',q=True,ro=True,ws=True)
+    maya.setAttr('cc_body_rotate01.r_stalk_follow',0)
+    maya.rotate(rot_e01[0],rot_e01[1],rot_e01[2],'cc_IK_r_stalk_e01',a=True,ws=True)
+    maya.rotate(rot_a01[0],rot_a01[1],rot_a01[2],'cc_IK_r_stalk_a01',a=True,ws=True)
+    maya.move(pos_e01[0],pos_e01[1],pos_e01[2],'cc_IK_r_stalk_e01',a=True,ws=True,rpr=True)
+    maya.move(pos_eye01[0],pos_eye01[1],pos_eye01[2],'cc_r_eyeball01',a=True,ws=True,rpr=True)
+    maya.rotate(rot_eye01[0],rot_eye01[1],rot_eye01[2],'cc_r_eyeball01',a=True,ws=True)
 
 
 def quickselection(controller,*arg):
-	global nameSpace
-	row1=cmds.radioButtonGrp('row1',q=True,sl=True)
-	row2= cmds.radioButtonGrp('row2',q=True,sl=True)
-	if (row2==3):
-		loadednamespace=''
-		if(maya.objExists(loadednamespace+controller)):
-			maya.select(loadednamespace+controller)
-		else:
-			maya.warning('Object '+loadednamespace+controller+'does not exist');
-		return
-	if (row1==0):
-		loadednamespace=nameSpace[row2+2]
-		print loadednamespace
-		if(maya.objExists('loadednamespace+controller')):
-			maya.select(loadednamespace+controller)
-		else:
-			maya.warning('Object '+loadednamespace+controller+'does not exist');
-		return
-	else:
-		loadednamespace=nameSpace[row1-1]
-		print loadednamespace
-		if(maya.objExists('loadednamespace+controller')):
-			maya.select(loadednamespace+controller)
-		else:
-			maya.warning('Object '+loadednamespace+controller+'does not exist');
-		return
+    global nameSpace
+    row1=cmds.radioButtonGrp('row1',q=True,sl=True)
+    row2= cmds.radioButtonGrp('row2',q=True,sl=True)
+    if (row2==3):
+        loadednamespace=''
+        if(maya.objExists(loadednamespace+controller)):
+            maya.select(loadednamespace+controller)
+        else:
+            maya.warning('Object '+loadednamespace+controller+'does not exist');
+        return
+    if (row1==0):
+        loadednamespace=nameSpace[row2+2]
+        print loadednamespace
+        if(maya.objExists('loadednamespace+controller')):
+            maya.select(loadednamespace+controller)
+        else:
+            maya.warning('Object '+loadednamespace+controller+'does not exist');
+        return
+    else:
+        loadednamespace=nameSpace[row1-1]
+        print loadednamespace
+        if(maya.objExists('loadednamespace+controller')):
+            maya.select(loadednamespace+controller)
+        else:
+            maya.warning('Object '+loadednamespace+controller+'does not exist');
+        return
 
 def Racing_pannel():
 
@@ -210,7 +226,7 @@ def Racing_pannel():
     maya.setParent('..')
     righand=maya.columnLayout('Rig_Hand',w=400,h=650)
     tabform01=maya.formLayout()
-   	#prefpath=maya.internalVar(upd=True)
+    #prefpath=maya.internalVar(upd=True)
     maya.image(image=prefpath+'icons/CharacterHand_Background.png')
     cc_l_stalkhand01_a01=maya.button(l='', w=20, h=20, al='center',bgc=(0,0,1),ann='cc_l_stalkhand01_a01',c=partial(quickselection,'cc_l_stalkhand01_a01'))
     cc_l_stalkhand01_b01=maya.button(l='', w=20, h=20, al='center',bgc=(0,0,1),ann='cc_l_stalkhand01_b01',c=partial(quickselection,'cc_l_stalkhand01_b01'))
